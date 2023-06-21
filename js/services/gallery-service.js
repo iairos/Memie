@@ -1,4 +1,5 @@
 'use strict'
+const IMG_STORAGE_KEY = 'imgDB'
 const keyWords = [
   'funny trump sign politic',
   'cute dog labs animal',
@@ -34,6 +35,17 @@ function _createImg(num, keywords) {
   }
 }
 function _createImgs() {
-  const images = keyWords.map((keyWord, idx) => _createImg(idx, keyWord))
+  let images = loadFromStorage(IMG_STORAGE_KEY)
+  if (!images || !images.length) {
+    images = keyWords.map((keyWord, idx) => _createImg(idx, keyWord))
+  }
   gImgs = images
+  _saveImagesToStorage()
+}
+function getImgById(imgId) {
+  const images = getImgs()
+  return images.filter((img) => imgId === img.id)[0]
+}
+function _saveImagesToStorage() {
+  saveToStorage(IMG_STORAGE_KEY, gImgs)
 }

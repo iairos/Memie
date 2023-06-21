@@ -13,7 +13,10 @@
     <main class="main-content">
       <section class="gallery-container"></section>
       <section class="canvas-container">
-        <canvas height="400" width="400"></canvas>
+        <label for="txt">Enter Text</label>
+        <input oninput="onSetLineTxt(this)" type="text" id="txt" />
+        <canvas class="canvas" height="500" width="400"></canvas>
+        <a href="#" onclick="onDownloadMeme(this)" download="">Download</a>
       </section>
       <section class="editor-container"></section>
     </main>
@@ -21,6 +24,7 @@
     <script src="js/services/utils.js"></script>
     <script src="js/services/gallery-service.js"></script>
     <script src="js/services/memie-service.js"></script>
+    <script src="js/gallery-controller.js"></script>
     <script src="js/memie-controller.js"></script>
   </body>
 </html>

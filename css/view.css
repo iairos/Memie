@@ -34,3 +34,8 @@ img {
 .gallery-btn {
   position: absolute;
 }
+.canvas {
+  display: block;
+  background-color: #dddd;
+  border: 1px solid black;
+}
