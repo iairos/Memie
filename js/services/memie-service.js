@@ -16,17 +16,20 @@ function _createMeme(selectedImgId, selectedImg) {
     selectedImgId,
     selectedImg,
     selectedLineIdx: 0,
-    lines: [
-      {
-        txt: 'eat code repeat',
-        size: 25,
-        color: 'green',
-      },
-    ],
+    lines: [_createLine()],
   }
 }
 function setLineTxt(text) {
   console.log(text)
   gMeme.lines[0].txt = text
   console.log(gMeme.lines[0].txt)
+}
+function addLine() {}
+function _createLine(txt = 'eat code repeat', size = 25, color = 'black') {
+  return {
+    id: makeId(),
+    txt,
+    size,
+    color,
+  }
 }

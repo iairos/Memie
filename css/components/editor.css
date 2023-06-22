@@ -1,0 +1,14 @@
+.editor-container {
+  /* width: 50%; */
+}
+.editor-btn-container {
+  gap: 1.125em;
+}
+.editor-btn {
+  width: 3.75rem;
+  height: 3.75rem;
+  padding: 0.6875rem;
+  background-color: white;
+  border: none;
+  border-radius: 0.75rem;
+}

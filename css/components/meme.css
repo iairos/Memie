@@ -1,0 +1,6 @@
+.meme-container {
+  gap: 4em;
+  background-color: var(--clrPrimary1);
+  width: 100%;
+  padding-block: 1.625em;
+}

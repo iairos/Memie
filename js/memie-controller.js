@@ -1,5 +1,12 @@
 'use strict'
-
+/**
+ * TODO:
+ * 1.Add Css
+ * 2.Add value to input field (so can be edited).
+ * 3.Add to lines array to each line an line.x
+ * and line.y coords (so can be found on canvas clicked).
+ *
+ */
 let gElCanvas, gCtx, gCurrImg
 
 function onInit() {
@@ -52,4 +59,7 @@ function onDownloadMeme(elLink) {
   // to pull information from remote web sites without permission.
   elLink.href = data
   elLink.download = 'my-img.jpg'
+}
+function onAddLine() {
+  addLine()
 }

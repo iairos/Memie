@@ -1,0 +1,12 @@
+.gallery-container {
+  gap: 0.3em;
+}
+.gallery-card {
+  position: relative;
+  background-color: darkgray;
+  width: 200px;
+  height: 200px;
+}
+.gallery-btn {
+  position: absolute;
+}

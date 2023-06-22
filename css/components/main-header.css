@@ -1,0 +1,14 @@
+.main-header {
+  background-color: var(--clrPrimary);
+  /* padding-inline: 1em; */
+}
+.main-header .main-nav {
+  /* gap: 1em; */
+}
+.main-header .main-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1875em;
+  height: 66px;
+}
