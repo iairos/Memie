@@ -1,14 +1,31 @@
 .editor-container {
   /* width: 50%; */
+  /* margin-inline-end: 8.5em; */
+  justify-self: start;
+}
+.editor-container select {
+  width: 13.625rem;
+  border: none;
+  border-radius: 0.75rem;
 }
 .editor-btn-container {
   gap: 1.125em;
 }
-.editor-btn {
-  width: 3.75rem;
+.editor-container #txt {
+  align-self: stretch;
   height: 3.75rem;
-  padding: 0.6875rem;
-  background-color: white;
-  border: none;
   border-radius: 0.75rem;
+  border: none;
+}
+.editor-btn-container.line-1 {
+  margin-block-start: 0.6875em;
+  flex: 1;
+}
+.editor-btn-container.line-2 {
+  margin-block-start: 2.6785em;
+  margin-block-end: 0.6875em;
+}
+
+.editor-btn-container.line-4 {
+  margin-block-start: 1.25em;
 }

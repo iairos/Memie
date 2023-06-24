@@ -1,3 +1,4 @@
+<!-- didnt have enough time to finish the sprint :(  -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,24 +20,41 @@
       </section>
     </header>
     <section class="gallery-filter full main-layout">
-      <div>
-        <input type="search" placeholder="" />
+      <div class="filter-container flex space-between">
+        <!-- <a href="#" class="btn bottom-btn">
+          Add Image
+        <input
+          type="file"
+          class="file-input btn"
+          name="image"
+          onchange="onImgInput(event)"
+          accept="image/*"
+        />
+      </a> -->
+        <div>
+          <input
+            type="search"
+            placeholder="Enter Search Keyword"
+            oninput="onFilterImagesByText(event)"
+          />
+        </div>
+        <div></div>
       </div>
     </section>
     <main class="main-content">
       <section class="gallery-container flex wrap center"></section>
-      <section class="meme-container flex center">
-        <section class="canvas-container">
+      <section class="meme-container flex center wrap">
+        <section class="canvas-container flex center align-center">
           <canvas class="canvas" height="500" width="400"></canvas>
         </section>
         <section class="editor-container flex direction-column align-center">
           <input
-            oninput="onSetLineTxt(this)"
+            oninput="onSetLineTxt(event)"
             type="text"
             id="txt"
             placeholder="Text Here"
           />
-          <div class="editor-btn-container 1 flex">
+          <div class="editor-btn-container line-1 flex">
             <button class="editor-btn" onclick="onSwitchLine()">
               <img
                 src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"
@@ -50,7 +68,7 @@
               <img src="img/ICONS/trash.png" alt="" />
             </button>
           </div>
-          <div class="editor-btn-container 1 flex">
+          <div class="editor-btn-container line-2 flex">
             <button class="editor-btn">
               <img src="img/ICONS/increase font - icon.png" alt="" /></button
             ><button class="editor-btn">
@@ -63,7 +81,37 @@
               <img src="img/ICONS/align-to-right.png" alt="" />
             </button>
           </div>
-          <a href="#" onclick="onDownloadMeme(this)" download="">Download</a>
+          <div class="editor-btn-container line-3 flex">
+            <select
+              name="font-family-select"
+              id="font-family-select"
+              oninput="onChangeFontFamily(this.value)"
+            >
+              <option value="Impact">Impact</option>
+              <option value="Arial">Arial</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Courier New">Courier New</option>
+            </select>
+            <button class="editor-btn">
+              <img src="img/ICONS/text-stroke-padding.png" alt="" />
+            </button>
+            <button class="editor-btn color-picker">
+              <img src="img/ICONS/paint-board-and-brush.png" alt="" />
+              <input type="color" oninput="onChangeFontColor(event)" />
+            </button>
+          </div>
+          <div class="editor-btn-container line-4 flex">
+            <a
+              class="btn bottom-btn download flex align-center center"
+              href="#"
+              onclick="onDownloadMeme(this)"
+              download=""
+              >Download</a
+            >
+            <button class="btn bottom-btn share" onclick="onUploadImg()">
+              Share
+            </button>
+          </div>
         </section>
       </section>
     </main>

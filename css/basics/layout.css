@@ -4,6 +4,7 @@
     minmax(auto, 20px)
     minmax(auto, 1160px)
     minmax(auto, 20px);
+  place-content: center;
 }
 .main-layout > *:not(.full) {
   grid-column: 2;

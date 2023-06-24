@@ -8,10 +8,12 @@
 @import url(basics/layout.css);
 
 /* COMPONENTS */
+@import url(components/buttons.css);
 @import url(components/main-header.css);
 @import url(components/logo.css);
 @import url(components/main-content.css);
 @import url(components/gallery.css);
+@import url(components/filter.css);
 @import url(components/meme.css);
 @import url(components/editor.css);
 @import url(components/canvas.css);

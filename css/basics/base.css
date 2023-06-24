@@ -1,11 +1,13 @@
 * {
   box-sizing: border-box;
 }
+html {
+  font-family: Montserrat;
+}
 body {
   margin: 0;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   text-align: center;
-  font-size: 1em;
+  font-size: 1rem;
 }
 img {
   width: 100%;
@@ -14,6 +16,7 @@ img {
 
 button {
   cursor: pointer;
+  font-family: Montserrat;
 }
 a {
   text-decoration: none;

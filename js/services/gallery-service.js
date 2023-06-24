@@ -21,10 +21,11 @@ const keyWords = [
   'funny movie toy story',
 ]
 let gImgs
+let gfilterByLetters = ''
 
 _createImgs()
 function getImgs() {
-  return gImgs
+  return filterImagesByText()
 }
 console.log(gImgs)
 function _createImg(num, keywords) {
@@ -48,4 +49,13 @@ function getImgById(imgId) {
 }
 function _saveImagesToStorage() {
   saveToStorage(IMG_STORAGE_KEY, gImgs)
+}
+function filterImagesByText() {
+  return gImgs.filter((image) => {
+    const keywords = image.keywords.join('').toLowerCase()
+    return keywords.includes(gfilterByLetters.toLowerCase())
+  })
+}
+function setFilterByText(letters) {
+  gfilterByLetters = letters
 }

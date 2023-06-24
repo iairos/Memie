@@ -1,0 +1,38 @@
+.btn {
+  border: none;
+  background-color: transparent;
+}
+.editor-btn {
+  width: 3.75rem;
+  height: 3.75rem;
+  padding: 0.6875rem;
+  background-color: white;
+  border: none;
+  border-radius: 0.75rem;
+}
+.editor-btn.color-picker {
+  position: relative;
+}
+.editor-btn input {
+  position: absolute;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+/* input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+} */
+.bottom-btn {
+  height: 3.75rem;
+  width: 7.5rem;
+  font-size: 1.25em;
+  border-radius: 0.75em;
+  color: white;
+  background-color: var(--clrPrimary);
+}
+.gallery-btn {
+  position: absolute;
+}

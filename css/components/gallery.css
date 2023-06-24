@@ -1,5 +1,7 @@
 .gallery-container {
-  gap: 0.3em;
+  gap: 1.3125em;
+  background-color: var(--clrPrimary1);
+  padding-block: 1.5625em;
 }
 .gallery-card {
   position: relative;
@@ -7,6 +9,10 @@
   width: 200px;
   height: 200px;
 }
-.gallery-btn {
-  position: absolute;
+.gallery-card img {
+  cursor: pointer;
+  transition: opacity 0.5s;
+}
+.gallery-card img:hover {
+  opacity: 0.6;
 }
