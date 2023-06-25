@@ -42,7 +42,7 @@ function renderMeme() {
   let centerX = gElCanvas.width / 2
   let centerY = gElCanvas.height
   const meme = getMeme()
-
+  fillInputWithText()
   const image = getImgById(meme.selectedImgId)
   const img = new Image()
   img.src = image.url
@@ -52,8 +52,8 @@ function renderMeme() {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     console.log(meme.selectedLineIdx)
     setLineCoords(centerX, centerY)
-    for (let i = 0; i < meme.lines.length; i++) {
-      const line = meme.lines[i]
+    // change to forEach
+    meme.lines.forEach((line, i) => {
       gCtx.textBaseline = 'center'
       gCtx.textAlign = 'center'
       gCtx.font = ` ${line.size}px ${line.fontFamily}`
@@ -66,7 +66,9 @@ function renderMeme() {
       ).fontBoundingBoxAscent
       setLineMeasures(lineWidth, lineHeight)
       gCtx.fillText(line.txt, line.x, line.y)
-    }
+    })
+    // for (let i = 0; i < meme.lines.length; i++) {
+    // }
   }
 }
 
@@ -111,7 +113,6 @@ function onDeleteLine() {
   if (!meme.lines.length) return
   deleteLine(meme.selectedLineIdx)
   renderMeme()
-  switchLine()
 }
 function onChangeFontColor(ev) {
   console.log(ev.target.value)
@@ -121,6 +122,10 @@ function onChangeFontColor(ev) {
 function onChangeFontFamily(fontFamily) {
   console.log(fontFamily)
   changeFontFamily(fontFamily)
+  renderMeme()
+}
+function onChangeFontSize(diff) {
+  changeFontSize(diff)
   renderMeme()
 }
 function onUploadImg() {
@@ -135,4 +140,10 @@ function onUploadImg() {
 
   // Send the image to the server
   doUploadImg(imgDataUrl, onSuccess)
+}
+function fillInputWithText() {
+  const meme = getMeme()
+  const elInput = document.querySelector('#txt')
+  if (!meme.lines[meme.selectedLineIdx]) return
+  elInput.value = meme.lines[meme.selectedLineIdx].txt
 }

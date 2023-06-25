@@ -13,7 +13,7 @@
         <div class="logo">Memie</div>
         <nav class="main-nav-container">
           <ul class="main-nav flex clean-list">
-            <li onclick="onShowGallery()"><a href="#">Gallery</a></li>
+            <li onclick="onInit()"><a href="#">Gallery</a></li>
             <li><a href="#">About</a></li>
           </ul>
         </nav>
@@ -69,9 +69,9 @@
             </button>
           </div>
           <div class="editor-btn-container line-2 flex">
-            <button class="editor-btn">
+            <button class="editor-btn" onclick="onChangeFontSize(5)">
               <img src="img/ICONS/increase font - icon.png" alt="" /></button
-            ><button class="editor-btn">
+            ><button class="editor-btn" onclick="onChangeFontSize(-5)">
               <img src="img/ICONS/decrease font - icon.png" alt="" /></button
             ><button class="editor-btn">
               <img src="img/ICONS/align-to-left.png" alt="" /></button

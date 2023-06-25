@@ -20,7 +20,6 @@ function _createMeme(selectedImgId, selectedImg) {
   }
 }
 function setLineTxt(text) {
-  console.log(text)
   gMeme.lines[gMeme.selectedLineIdx].txt = text
 }
 function addLine() {
@@ -107,6 +106,9 @@ function doUploadImg(imgDataUrl, onSuccess) {
 function deleteLine(idx) {
   console.log(idx)
   gMeme.lines.splice(idx, 1)
+  if (gMeme.selectedLineIdx > 0) {
+    gMeme.selectedLineIdx--
+  }
 }
 function changeFontFamily(fontFamily) {
   gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
@@ -114,4 +116,14 @@ function changeFontFamily(fontFamily) {
 
 function changeFontColor(selectedColor) {
   gMeme.lines[gMeme.selectedLineIdx].color = selectedColor
+}
+function changeFontSize(diff) {
+  if (
+    gMeme.lines[gMeme.selectedLineIdx].size === 50 ||
+    gMeme.lines[gMeme.selectedLineIdx].size === 15
+  ) {
+    gMeme.lines[gMeme.selectedLineIdx].size = 30
+    return
+  }
+  gMeme.lines[gMeme.selectedLineIdx].size += diff
 }
