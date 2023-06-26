@@ -10,31 +10,17 @@ function selectImg(imgId) {
   gMeme.selectedImgId = imgId
   console.log(gMeme)
 }
-function _createMeme(selectedImgId, selectedImg) {
-  return {
-    id: makeId(),
-    selectedImgId,
-    selectedImg,
-    selectedLineIdx: 0,
-    lines: [_createLine()],
-  }
-}
+
 function setLineTxt(text) {
   gMeme.lines[gMeme.selectedLineIdx].txt = text
 }
 function addLine() {
+  if (gMeme.lines.length) {
+    gMeme.selectedLineIdx++
+  }
   gMeme.lines.push(_createLine())
 }
 
-function _createLine(txt = 'eat code repeat', size = 30, color = 'green') {
-  return {
-    id: makeId(),
-    txt,
-    size,
-    color,
-    fontFamily: 'Impact',
-  }
-}
 function switchLine() {
   if (
     gMeme.selectedLineIdx === 2 ||
@@ -65,6 +51,7 @@ function setLineCoords(x, y) {
     console.log(gMeme)
   })
 }
+// not called
 function setLineMeasures(width, height) {
   gMeme.lines[gMeme.selectedLineIdx].width = width
   gMeme.lines[gMeme.selectedLineIdx].height = height
@@ -108,7 +95,23 @@ function deleteLine(idx) {
   gMeme.lines.splice(idx, 1)
   if (gMeme.selectedLineIdx > 0) {
     gMeme.selectedLineIdx--
+    return
   }
+  gMeme.selectedLineIdx = 0
+}
+function setTextAlign(txtAlignDirection, posX) {
+  switch (txtAlignDirection) {
+    case 'left':
+      posX = 0
+      break
+    default:
+      if (txtAlignDirection !== 'right') {
+        posX = posX / 2
+      }
+      break
+  }
+  gMeme.lines[gMeme.selectedLineIdx].x = posX
+  gMeme.lines[gMeme.selectedLineIdx].txtAlignDirection = txtAlignDirection
 }
 function changeFontFamily(fontFamily) {
   gMeme.lines[gMeme.selectedLineIdx].fontFamily = fontFamily
@@ -126,4 +129,23 @@ function changeFontSize(diff) {
     return
   }
   gMeme.lines[gMeme.selectedLineIdx].size += diff
+}
+
+function _createLine(txt = 'eat code repeat', size = 30, color = 'green') {
+  return {
+    id: makeId(),
+    txt,
+    size,
+    color,
+    fontFamily: 'Impact',
+  }
+}
+function _createMeme(selectedImgId, selectedImg) {
+  return {
+    id: makeId(),
+    selectedImgId,
+    selectedImg,
+    selectedLineIdx: 0,
+    lines: [_createLine()],
+  }
 }

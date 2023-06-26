@@ -2,16 +2,16 @@
 /**
  * TODO:
  * 1.Add Css
- * 2.Add value to input field (so can be edited).
  * 3.Add to lines array to each line an line.x
  * and line.y coords (so can be found on canvas clicked).
- * 4.line.width = gCtx.measureText(line.txt).width 
- * 5.line.height = gCtx.measureText(line.txt).fontBoundingBoxAscent
-
+ *
+ * DONE:
+ * 2.Add value to input field (so can be edited).
  */
-let gElCanvas, gCtx, gCurrImg
+let gElCanvas, gCtx, gCurrImg, gIsStroke
 
 function onInit() {
+  gIsStroke = false
   hideEditor()
   initCanvas()
   renderGallery()
@@ -39,23 +39,21 @@ function initCanvas() {
 
 function renderMeme() {
   // gCtx.clearRect(0, 0, gElCanvas.height, gElCanvas.width)
-  let centerX = gElCanvas.width / 2
-  let centerY = gElCanvas.height
   const meme = getMeme()
   fillInputWithText()
+
   const image = getImgById(meme.selectedImgId)
   const img = new Image()
   img.src = image.url
   img.onload = () => {
     gElCanvas.height = (img.naturalHeight * gElCanvas.width) / img.naturalWidth
-
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-    console.log(meme.selectedLineIdx)
-    setLineCoords(centerX, centerY)
-    // change to forEach
+
+    console.log('selectedLineIdx:', meme.selectedLineIdx)
+
     meme.lines.forEach((line, i) => {
       gCtx.textBaseline = 'center'
-      gCtx.textAlign = 'center'
+      gCtx.textAlign = line.txtAlignDirection
       gCtx.font = ` ${line.size}px ${line.fontFamily}`
       gCtx.fillStyle = line.color
       const lineWidth = gCtx.measureText(
@@ -64,11 +62,11 @@ function renderMeme() {
       const lineHeight = gCtx.measureText(
         meme.lines[meme.selectedLineIdx].txt
       ).fontBoundingBoxAscent
-      setLineMeasures(lineWidth, lineHeight)
+      // fix below function
+      // setLineMeasures(lineWidth, lineHeight)
+      gCtx.strokeText(line.txt, line.x, line.y)
       gCtx.fillText(line.txt, line.x, line.y)
     })
-    // for (let i = 0; i < meme.lines.length; i++) {
-    // }
   }
 }
 
@@ -79,26 +77,27 @@ function onSetLineTxt(ev) {
   self.setLineTxt(text)
   self.renderMeme()
 }
-// downloadMeme
-function onDownloadMeme(elLink) {
-  onInit()
-  // Protect the image soo attacker could not download imgs from diff domain
-  const data = gElCanvas.toDataURL() // For security reason you cannot do toDataUrl on tainted canvas
-  // This protects users from having private data exposed by using images
-  // to pull information from remote web sites without permission.
-  elLink.href = data
-  elLink.download = 'my-img.jpg'
-}
+
 function onAddLine() {
+  let canvasWidth = gElCanvas.width
   const meme = getMeme()
   if (meme.lines.length === 3) return
   addLine()
+  handleNewLine()
+  setTextAlign('center', canvasWidth)
   renderMeme()
 }
-
+function handleNewLine() {
+  let centerX = gElCanvas.width / 2
+  let centerY = gElCanvas.height
+  setLineCoords(centerX, centerY)
+}
 function onSelectImg(imgId) {
+  let canvasWidth = gElCanvas.width
   hideGallery()
   selectImg(imgId)
+  handleNewLine()
+  setTextAlign('center', canvasWidth)
   showEditor()
   renderMeme()
 }
@@ -114,6 +113,12 @@ function onDeleteLine() {
   deleteLine(meme.selectedLineIdx)
   renderMeme()
 }
+function onSetTextAlign(direction) {
+  let canvasWidth = gElCanvas.width
+  setTextAlign(direction, canvasWidth)
+  renderMeme()
+}
+
 function onChangeFontColor(ev) {
   console.log(ev.target.value)
   changeFontColor(ev.target.value)
@@ -127,6 +132,20 @@ function onChangeFontFamily(fontFamily) {
 function onChangeFontSize(diff) {
   changeFontSize(diff)
   renderMeme()
+}
+function onSetStrokeText() {
+  setStrokeText()
+  renderMeme()
+}
+// downloadMeme
+function onDownloadMeme(elLink) {
+  onInit()
+  // Protect the image soo attacker could not download imgs from diff domain
+  const data = gElCanvas.toDataURL() // For security reason you cannot do toDataUrl on tainted canvas
+  // This protects users from having private data exposed by using images
+  // to pull information from remote web sites without permission.
+  elLink.href = data
+  elLink.download = 'my-img.jpg'
 }
 function onUploadImg() {
   // Gets the image from the canvas
